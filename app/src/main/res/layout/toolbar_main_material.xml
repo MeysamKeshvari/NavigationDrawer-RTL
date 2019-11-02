@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.appbar.MaterialToolbar
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layoutDirection="rtl"
+    app:title="NEMA"
+    app:titleTextColor="@color/colorPrimaryDark"
+    app:subtitle="MOTOR"
+    app:subtitleTextColor="@color/colorAccent"
+    app:navigationIcon="@drawable/ic_menu_black_24dp">
+
+</com.google.android.material.appbar.MaterialToolbar>

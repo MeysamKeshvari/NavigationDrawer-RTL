@@ -1,0 +1,26 @@
+<androidx.drawerlayout.widget.DrawerLayout
+    android:id="@+id/drawerLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.MainActivity">
+
+
+    <include
+        layout="@layout/app_bar_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </include>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/drawerRecyclerView"
+        android:layout_width="280dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#F1F1F1">
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+
+</androidx.drawerlayout.widget.DrawerLayout>
