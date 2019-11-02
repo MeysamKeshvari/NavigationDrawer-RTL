@@ -1,4 +1,4 @@
-package meysam.navigationdrawertest;
+package meysam.navigationdrawertest.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+
+import meysam.navigationdrawertest.R;
 
 public class FirstFragment extends Fragment {
 
