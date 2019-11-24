@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_stores"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="تنظیمات">
+
+    </item>
+    <item
+        android:id="@+id/action_coupons"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="باتری">
+
+    </item>
+    <item
+        android:id="@+id/action_cashback"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="عملکرد">
+
+    </item>
+    <item
+        android:id="@+id/action_deals"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="خانه">
+    </item>
+
+</menu>

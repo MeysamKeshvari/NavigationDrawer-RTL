@@ -1,6 +1,5 @@
 package meysam.navigationdrawertest.activity;
 
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
@@ -11,12 +10,13 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 import java.util.ArrayList;
 import meysam.navigationdrawertest.fragment.FirstFragment;
+import meysam.navigationdrawertest.fragment.MainFragment;
 import meysam.navigationdrawertest.interfaces.FragmentChangeListener;
 import meysam.navigationdrawertest.R;
 import meysam.navigationdrawertest.adapter.DrawerAdapter;
@@ -24,17 +24,35 @@ import meysam.navigationdrawertest.model.DrawerItem;
 
 public class MainActivity extends AppCompatActivity implements FragmentChangeListener {
 
-    private Toolbar mToolbar;
+    private Toolbar toolbar;
     private RecyclerView mRecyclerView;
     private ArrayList<DrawerItem> mDrawerItemList;
     private DrawerLayout drawerLayout;
-    private ActionBarDrawerToggle mDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setSupportActionBar(mToolbar);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawerLayout = findViewById(R.id.drawerLayout);
+        mRecyclerView = findViewById(R.id.drawerRecyclerView);
+
+        MainFragment fragment = new MainFragment();
+        replaceFragment(fragment);
+
+       toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               drawerLayout.openDrawer(GravityCompat.END);
+               if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
+                   drawerLayout.closeDrawer(GravityCompat.END);
+               } else {
+                   drawerLayout.openDrawer(GravityCompat.END);
+               }
+           }
+       });
 
         mDrawerItemList = new ArrayList<DrawerItem>();
 
@@ -48,41 +66,12 @@ public class MainActivity extends AppCompatActivity implements FragmentChangeLis
         item2.setTitle("ارسال");
         mDrawerItemList.add(item2);
 
-        mRecyclerView = findViewById(R.id.drawerRecyclerView);
+
         DrawerAdapter adapter = new DrawerAdapter(mDrawerItemList);
+
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(adapter);
-        drawerLayout = findViewById(R.id.drawerLayout);
 
-        ImageView imageView = findViewById(R.id.imageView);
-
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //drawerLayout.openDrawer(GravityCompat.START);
-                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
-                    drawerLayout.closeDrawer(GravityCompat.START);
-                } else {
-                    drawerLayout.openDrawer(GravityCompat.START);
-                }
-                Log.d("DBG","Clicked");
-            }
-        });
-
-        /*mDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, mToolbar, R.string.open, R.string.close) {
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                super.onDrawerClosed(drawerView);
-                Toast.makeText(MainActivity.this, "Closed", Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-                Toast.makeText(MainActivity.this, "Opened", Toast.LENGTH_SHORT).show();
-            }
-        };
-        drawerLayout.addDrawerListener(mDrawerToggle);
-        mDrawerToggle.syncState();*/
 
         adapter.setOnItemClickLister(new DrawerAdapter.OnItemSelectedListener() {
             @Override
@@ -103,6 +92,15 @@ public class MainActivity extends AppCompatActivity implements FragmentChangeLis
 
 
     @Override
+    public void onBackPressed() {
+        DrawerLayout drawer = findViewById(R.id.drawerLayout);
+        if (drawer.isDrawerOpen(GravityCompat.END)) {
+            drawer.closeDrawer(GravityCompat.END);
+        } else {
+            super.onBackPressed();
+        }
+    }
+    @Override
     public void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -112,15 +110,20 @@ public class MainActivity extends AppCompatActivity implements FragmentChangeLis
 
    /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.menu_drawer, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        if (id == R.id.action_drawer){
+            drawerLayout.openDrawer(GravityCompat.END);
+            if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
+                drawerLayout.closeDrawer(GravityCompat.END);
+            } else {
+                drawerLayout.openDrawer(GravityCompat.END);
+            }
         }
         return super.onOptionsItemSelected(item);
     }*/
