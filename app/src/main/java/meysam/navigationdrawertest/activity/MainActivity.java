@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements FragmentChangeLis
                     case 1:
                         FirstFragment fragment = new FirstFragment();
                         replaceFragment(fragment);
+                        drawerLayout.closeDrawers();
                         break;
                     case 2:
                         break;
